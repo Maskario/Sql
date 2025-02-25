@@ -4,7 +4,6 @@ USE bibliotheque;
 /*
 Partie 1 : Création de tables (30 points), Création de la table "Livre" et la table "Lecteur" :
 */
-
 CREATE TABLE livres (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titre VARCHAR(100) NOT NULL,
@@ -25,7 +24,6 @@ CREATE TABLE lecteurs (
 /*
 Partie 2 : Insertion de données (15 points), insertion de données dans la table "livres", idem pour la table "lecteurs"
 */
-
 INSERT INTO livres (titre, auteur, annee_publication, genre, isbn) VALUES
 ('Le Petit Prince', 'Antoine de Saint-Exupéry', 1943, 'Conte', '9782070612758'),
 ('1984', 'George Orwell', 1949, 'Science-fiction', '9780451524935'),
@@ -43,7 +41,6 @@ SELECT * FROM livres;
 
 /* Sélectionnez le titre et l'auteur des livres publiés après 1950. (5 points) :    */
 SELECT titre, auteur FROM livres WHERE annee_publication > 1950;
-
 
 /* Affichez le nom et le prénom des lecteurs nés avant 1990. (5 points) :    */
 SELECT nom, prenom FROM lecteurs WHERE date_naissance < '1990-01-01';
@@ -71,4 +68,10 @@ SELECT
     CONCAT(prenom, ' ', nom) AS nom_complet, 
     TIMESTAMPDIFF(YEAR, date_naissance, CURDATE()) AS age
 FROM lecteurs;
+
+/* Créez une requête qui affiche le nombre de livres par genre, triés par ordre décroissant du nombre de livres. (10 points) :    */
+SELECT genre, COUNT(*) AS nombre_de_livres 
+FROM livres 
+GROUP BY genre 
+ORDER BY nombre_de_livres DESC;
 
